@@ -1,0 +1,10 @@
+pytelegrambotapi
+DateTime
+python-time
+urllib3
+json
+requests
+random
+os
+gtts
+praw
