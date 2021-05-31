@@ -2,7 +2,7 @@ pytelegrambotapi
 DateTime
 python-time
 urllib3
-json
+jsonlib
 requests
 random
 os
