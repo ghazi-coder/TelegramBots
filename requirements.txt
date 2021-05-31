@@ -4,7 +4,4 @@ python-time
 urllib3
 jsonlib
 requests
-random
-os
-gtts
-praw
+
