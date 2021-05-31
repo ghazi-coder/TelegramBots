@@ -2,6 +2,5 @@ pytelegrambotapi
 DateTime
 python-time
 urllib3
-jsonlib
 requests
 
