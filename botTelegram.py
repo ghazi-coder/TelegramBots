@@ -42,8 +42,6 @@ Contoh = /cuaca Banda Aceh
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
 
-/quotesBot > Motivasi dari Bot
-
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari
 Contoh = /sceanime saturday
@@ -129,22 +127,6 @@ def send_welcome(message):
         bot.reply_to(message, out)
     except:
         bot.reply_to(message, "Kota tidak ditemukan 😭")
-
-
-
-#PERINTAH Quotes
-@bot.message_handler(commands=['quotesBot'])
-def send_welcome(message):
-    log(message, "Quotes Bot")
-
-    file = open('tamparan_online.txt', 'r')
-    baca = file.readlines()
-    banyak_baris = len(baca)
-    baris = random.randint(0, banyak_baris)
-    output = baca[baris-1]
-
-    bot.reply_to(message, output)
-    file.close()
 
 #                                       MEDIA
 #PERINTAH MELHAT PRAKIRAAN CUACA
