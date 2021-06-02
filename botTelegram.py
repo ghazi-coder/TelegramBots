@@ -279,15 +279,7 @@ def downloadvidtiktok(message):
         log(message, f"TIKTOK Video {video}")
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")     
-
-
-
-time.sleep(3)
-out = open(namaFile, 'rb')
-bot.send_video(message.chat.id, out)
-print(message.chat.id)
-out.close()
-log(message, f"IG Video {video}")        
+        
         
 #PERINTAH BERITA HEADLINE MEDIA INDONESIA
 @bot.message_handler(commands=['news'])
