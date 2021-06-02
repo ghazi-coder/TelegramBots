@@ -29,6 +29,7 @@ def menu(message):
 1️⃣ ISLAMIC✨
 /sholat namakota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 Contoh = /sholat bandaaceh
+/hadist
 
 2️⃣ ARTIFICIAL INTELIGENCE 🧠
 -🗣 Bot dilengkapi dengan auto respon, cocok digunakan untuk partner berbahasa inggris
@@ -100,7 +101,10 @@ def log(message, perintah):
     log_bot.close()
     print(text)
 
-#ISLAMIC FITUR
+    
+    
+#                                                                   ISLAMIC FITUR
+
 @bot.message_handler(commands=['sholat']) #sumber API : https://aladhan.com/prayer-times-api#GetTimingsByCity
 def send_welcome(message):
     try:
@@ -119,18 +123,31 @@ def send_welcome(message):
         out = f"""Jadwal Sholat 🕌
 🌑 Imsyak  {result['Imsak']}
 🌗 Shubuh  {result['Fajr']}
-🌗 Terbit  {result['Sunrise']}
-🌞 Dzuhur  {result['Dhuhr']}
-🌓 Ashar   {result['Asr']}
+🌗 Terbit     {result['Sunrise']}
+🌞 Dzuhur   {result['Dhuhr']}
+🌓 Ashar     {result['Asr']}
 🌓 Maghrib {result['Maghrib']}
-🌚 Isya    {result['Isha']}
+🌚 Isya        {result['Isha']}
             """
         log(message, f"Jadwal Sholat {pesan}")
         bot.reply_to(message, out)
     except:
         bot.reply_to(message, "Kota tidak ditemukan 😭")
+        
+@bot.message_handler(commands=['/hadist'])
+def hadits(message):
+    url = urlopen(
+        f"http://api.carihadis.com/?kitab=Shahih_Bukhari&id=7008")
+    dokumen = url.read().decode("utf-8")
+    data = json.loads(dokumen)
+    out = data['data']['1']['terjemah']
 
+    bot.reply_to(message, out)
+        
+        
+        
 #                                       MEDIA
+
 #PERINTAH MELHAT PRAKIRAAN CUACA
 @bot.message_handler(commands=['cuaca'])
 def send_welcome(message):
@@ -175,11 +192,12 @@ def jadwalRilis(message):
     update    = data['lastUpdate']
     time      = update[:16]
     out    = "Kasus Covid-19 🇲🇨\n\nPositif         : {:,}\nSembuh      : {:,}\nMeninggoi  : {:,}\n\nUpdate pada {}\nJangan lupa pakai masker😷".format(positif, sembuh, meninggal, time)
+    log(message, "COVID19")
     bot.reply_to(message, out)
 
 
 
-#                                           M E D S O S
+#                                                    M E D S O S
 #INSTAGRAMM
 @bot.message_handler(commands=['igvid'])
 def downloadig(message):
@@ -255,8 +273,10 @@ def send_welcome(message):
     del(list)
     del(kya)
 
+    
 
-#ANIME
+#                                                           ANIME
+
 @bot.message_handler(commands=['sceanime'])
 def jadwalRilis(message):
     try:
@@ -295,7 +315,9 @@ def jadwalRilis(message):
     except:
         bot.reply_to(message, "Anime Tydack ditemukan 🤦🏻 ")
 
-#BOT AI
+        
+#                                                           BOT A I
+
 alphabet = ['q','w','e','r','t','y','u','i','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
 
 for i in alphabet: #API LINK : https://rapidapi.com/farish978/api/ai-chatbot/pricing
