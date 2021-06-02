@@ -49,6 +49,8 @@ Contoh = /cuaca Banda Aceh
 Contoh = /sceanime saturday
 note : nama hari harus dalam bahasa INGGRES
 
+/tulis text > bot tulis
+
 kyaaa...!
 
 Kritik dan Saran ; /masukan
@@ -58,7 +60,7 @@ Kritik dan Saran ; /masukan
 
                   #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100 ]
-listMenu = ['/menu','/sholat','/hadist','/cuaca','/news','/igvid','https://www.instagram.com/p','https://www.instagram.com/tv','https://www.tiktok.com/','/tiktokVid','/sceanime','/quotesBot']
+listMenu = ['/menu','/sholat','/hadist','/cuaca','/news','/igvid','https://www.instagram.com/p','https://www.instagram.com/tv','https://www.tiktok.com/','/tiktokVid','/sceanime','/tulis']
 
 def kirimPesan(idPengguna):
     out = "DEEKKK, KALAU MAU DOWNLOAD VIDEO IG\nGAUSAH CLICK LAGI MENUNYA YAW\nSEKARANG UDAH BISA LANGSUNG PASTE LINKNYA DI CHAT\n'seperti yang anda inginkan\n\n\n #FROM DEVELOPER'"
@@ -384,6 +386,29 @@ def aibot(pesan, name, tujuan):
         bot.reply_to(tujuan, out)
     except:
         bot.reply_to(tujuan, "Sorry, I can't read emoticons 😕")
+
+        # BOT TULIS
+@bot.message_handler(commands=['tulis'])
+def tulis1(message):
+    masukan = message.text
+    list = masukan.split(' ')
+    link = list[1]
+    url = f"https://hadi-api.herokuapp.com/api/nulis?teks={masukan}"
+
+    nama = message.from_user.first_name
+    namaFile = f'{nama}.jpg'
+    img_data = requests.get(url).content
+    with open(f'{namaFile}', 'wb') as handler:
+        handler.write(img_data)
+        handler.close()
+
+    out = open(namaFile, 'rb')
+    bot.send_photo(message.chat.id, out)
+    out.close()
+    log(message, f"Bot tulis 1")
+    time.sleep(1)
+    os.remove(namaFile)        
+
 
 print("Bot Running...")
 bot.polling()
