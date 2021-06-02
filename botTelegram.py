@@ -29,7 +29,7 @@ def menu(message):
 1️⃣ ISLAMIC✨
 /sholat namakota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 Contoh = /sholat bandaaceh
-/hadist
+/hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
 
 2️⃣ ARTIFICIAL INTELIGENCE 🧠
 -🗣 Bot dilengkapi dengan auto respon, cocok digunakan untuk partner berbahasa inggris
@@ -136,12 +136,17 @@ def send_welcome(message):
         
 @bot.message_handler(commands=['hadist'])
 def hadits(message):
+    
+    x = random.randint(1,7008)
     url = urlopen(
-        f"http://api.carihadis.com/?kitab=Shahih_Bukhari&id=7008")
+        f"http://api.carihadis.com/?kitab=Shahih_Bukhari&id={x}")
     dokumen = url.read().decode("utf-8")
     data = json.loads(dokumen)
-    out = data['data']['1']['terjemah']
 
+    no   = data['data']['1']['id']
+    nass = data['data']['1']['nass']
+    terjemahan = data['data']['1']['terjemah']
+    out = f"No Hadist {no}\n{nass}\n{terjemahan}"
     bot.reply_to(message, out)
         
         
