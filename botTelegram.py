@@ -57,7 +57,7 @@ Kritik dan Saran ; /masukan
 
                   #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100 ]
-listMenu = ['/menu','/sholat','/cuaca','/news','/igvid','https://www.instagram.com/p','https://www.instagram.com/tv''/sceanime','/quotesBot']
+listMenu = ['/menu','/sholat','/hadist','/cuaca','/news','/igvid','https://www.instagram.com/p','https://www.instagram.com/tv''/sceanime','/quotesBot']
 
 def kirimPesan(idPengguna):
     out = "DEEKKK, KALAU MAU DOWNLOAD VIDEO IG\nGAUSAH CLICK LAGI MENUNYA YAW\nSEKARANG UDAH BISA LANGSUNG PASTE LINKNYA DI CHAT\n'seperti yang anda inginkan\n\n\n #FROM DEVELOPER'"
