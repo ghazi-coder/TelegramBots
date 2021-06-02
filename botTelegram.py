@@ -270,7 +270,7 @@ def downloadvidtiktok(message):
         with open(namaFile, 'wb') as f:
                    for chunk in req.iter_content(chunk_size=8192):
                         f.write(chunk)
-                    f.close()
+                   f.close()
         time.sleep(4)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
