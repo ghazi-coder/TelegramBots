@@ -103,7 +103,7 @@ def log(message, perintah):
 
     
     
-#                                                                   ISLAMIC FITUR
+#                                                                   1️⃣ ISLAMIC ✨
 
 @bot.message_handler(commands=['sholat']) #sumber API : https://aladhan.com/prayer-times-api#GetTimingsByCity
 def send_welcome(message):
@@ -134,7 +134,7 @@ def send_welcome(message):
     except:
         bot.reply_to(message, "Kota tidak ditemukan 😭")
         
-@bot.message_handler(commands=['/hadist'])
+@bot.message_handler(commands=['hadist'])
 def hadits(message):
     url = urlopen(
         f"http://api.carihadis.com/?kitab=Shahih_Bukhari&id=7008")
