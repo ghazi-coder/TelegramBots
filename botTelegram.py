@@ -391,8 +391,9 @@ def aibot(pesan, name, tujuan):
 @bot.message_handler(commands=['tulis'])
 def tulis1(message):
     masukan = message.text
+    bot.reply_to(message, 'contoh - contoh orang malas\nhehehe...')
     list = masukan.split(' ')
-    link = list[1]
+    link = list[1:]
     url = f"https://hadi-api.herokuapp.com/api/nulis?teks={masukan}"
 
     nama = message.from_user.first_name
@@ -403,7 +404,7 @@ def tulis1(message):
         handler.close()
 
     out = open(namaFile, 'rb')
-    bot.send_photo(message.chat.id, out)
+    bot.send_photo(message, out)
     out.close()
     log(message, f"Bot tulis 1")
     time.sleep(1)
