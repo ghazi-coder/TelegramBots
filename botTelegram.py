@@ -47,6 +47,8 @@ Contoh = /cuaca Banda Aceh
 Contoh = /sceanime saturday
 note : nama hari harus dalam bahasa INGGRES
 
+kyaaa...!
+
 Kritik dan Saran ; /masukan
 ''')
     idP = message.chat.id
