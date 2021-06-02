@@ -81,7 +81,7 @@ def helpp(message):
     item   = types.InlineKeyboardButton('Message Developer 🧑🏻‍💻', url='https://telegram.me/Qadrillah')
     markup.row(item)
     bot.send_message(message.chat.id, 'Click tombol dibawah ini ya..', reply_markup=markup)
-    log(message.from_user.first_name, "masukan")
+    log(message, "masukan")
 #RIWAYAT PENGGUNA
 def log(message, perintah):
     jam = time.strftime('%H')  # : %M : %S'
