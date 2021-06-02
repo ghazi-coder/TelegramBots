@@ -42,6 +42,7 @@ Contoh = /cuaca Banda Aceh
 
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
+/tiktokVid > Unduh video TikTok tanpa watermark
 
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari
@@ -57,7 +58,7 @@ Kritik dan Saran ; /masukan
 
                   #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100 ]
-listMenu = ['/menu','/sholat','/hadist','/cuaca','/news','/igvid','https://www.instagram.com/p','https://www.instagram.com/tv''/sceanime','/quotesBot']
+listMenu = ['/menu','/sholat','/hadist','/cuaca','/news','/igvid','https://www.instagram.com/p','https://www.instagram.com/tv','https://www.tiktok.com/','/tiktokVid','/sceanime','/quotesBot']
 
 def kirimPesan(idPengguna):
     out = "DEEKKK, KALAU MAU DOWNLOAD VIDEO IG\nGAUSAH CLICK LAGI MENUNYA YAW\nSEKARANG UDAH BISA LANGSUNG PASTE LINKNYA DI CHAT\n'seperti yang anda inginkan\n\n\n #FROM DEVELOPER'"
@@ -244,10 +245,50 @@ def downloadig(message):
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
         out.close()
-        log(message, f"IG Video {video}")
+        log(message, f"IGVID Video {namaFile}")
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
+# TIKTOK vIDEO
+@bot.message_handler(regexp='https://www.tiktok.com/')
+def downloadvidtiktok(message):
+    try:
+        link = message.text
+        bot.send_message(message.chat.id, "Sabarr Boss...")
+        url = urlopen(
+            f"https://backend-ihsandevs.herokuapp.com/api/TikTok%20Downloader/?url_video={link}&utm_source=beamer&utm_medium=sidebar&utm_campaign=API-TikTok-Downloader&utm_content=ctalink")
+        dokumen = url.read().decode("utf-8")
+        data = json.loads(dokumen)
+
+        video = data['result']['format']['video']
+        akhir = data['result']['thumb']
+        akhir = akhir.split('/')
+        req = requests.get(video)
+        nama = message.from_user.first_name
+        namaFile = f"{nama}_{akhir[3]}.mp4"
+
+        with open(namaFile, 'wb') as f:
+                   for chunk in req.iter_content(chunk_size=8192):
+                        f.write(chunk)
+                    f.close()
+        time.sleep(4)
+        out = open(namaFile, 'rb')
+        bot.send_video(message.chat.id, out)
+        print(message.chat.id)
+        out.close()
+        log(message, f"TIKTOK Video {video}")
+    except:
+        bot.reply_to(message, "Tidak dapat mengunduh video 😭")     
+
+
+
+time.sleep(3)
+out = open(namaFile, 'rb')
+bot.send_video(message.chat.id, out)
+print(message.chat.id)
+out.close()
+log(message, f"IG Video {video}")        
+        
 #PERINTAH BERITA HEADLINE MEDIA INDONESIA
 @bot.message_handler(commands=['news'])
 def send_welcome(message):
