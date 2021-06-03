@@ -41,6 +41,7 @@ def menu(message):
 /tiktokVid > Unduh video TikTok tanpa watermark
 
 5️⃣ EDUCATION 🏫
+/wiki text  > pencarian dengan wikipedia
 /tulis text > bot tulis
 
  O T H E R
@@ -59,7 +60,7 @@ Kritik dan Saran ; /masukan
 
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
-listMenu = ['/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
+listMenu = ['/test','/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
     'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
            ]
 
@@ -386,8 +387,9 @@ def jokes(message):
 
         link = data['result']
         bot.reply_to(message, str(link))
+        log(message, f'wikiped {masukan}')
     except:
-        bot.reply_to(message, f"'{masukan}' tidak ditemukan di wikipedia 🤦🏻")
+        bot.reply_to(message, f"'{inpuutan[6:]}' tidak ditemukan di wikipedia 🤦🏻")
 
         
  # BOT TULIS
@@ -463,8 +465,31 @@ def chordGuitar(message):
     except:
         bot.reply_to(message, "tidak dapat menemukan chord gitar 🤦🏻") 
 
+@bot.message_handler(commands=['test'])
+def chordGuitar(message):
 
+    url = urlopen(
+      "https://sinta.ristekbrin.go.id/authors/detail?id=6022530&view=overview"
+    )
+    # Ambil/baca dokumen
+    dokumen = url.read().decode("utf-8")
+    # Buka HTML
+    soup = BeautifulSoup(dokumen, "html.parser")
+    #temukan data 
+    finddata = soup.body.find_all('div', class_="uk-width-1-6 stat-num-pub")
 
+    data = []
+    for i in finddata:
+      x = i.string
+      data.append(x)
+
+    document = data[5]
+    citations = data[6]
+
+    rata2Citation = round(int(document)/int(citations),2)
+
+    out = f"Documents: {document}\nCitations: {citations}\nRata-rata Citation: {rata2Citation}"
+    bot.reply_to(message, str(out))
 
 
 
