@@ -47,7 +47,7 @@ def menu(message):
  O T H E R
 /jokes     > Jokes random
 /crdGuitar nama lagu > Kunci gitar 
-
+`
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari dalam bahasa inggris
 
@@ -61,7 +61,7 @@ Kritik dan Saran ; /masukan
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
 listMenu = ['/test','/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
-    'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
+    'https://www.instagram.com/tv', 'https://www.tiktok.com/','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
            ]
 
 
