@@ -40,11 +40,12 @@ def menu(message):
 /igvid > Unduh video dari IG
 /tiktokVid > Unduh video TikTok tanpa watermark
 
-5️⃣ AKADEMIK 🏫
+5️⃣ EDUCATION 🏫
 /tulis text > bot tulis
 
-OTHER
-/jokes > jokes random
+ O T H E R
+/jokes     > Jokes random
+/crdGuitar nama lagu > Kunci gitar 
 
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari
@@ -60,7 +61,7 @@ Kritik dan Saran ; /masukan
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
 listMenu = ['/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p',
-    'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime','/jokes'
+    'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
            ]
 
 
@@ -397,7 +398,7 @@ def tulis1(message):
 
 
         
-#                                       O  T  H  E  R
+#                                                                                  O  T  H  E  R
 
 #jokes
 @bot.message_handler(commands=['jokes'])
@@ -424,7 +425,23 @@ def jokes(message):
     except:
         bot.reply_to(message, "tidak dapat menampilkan jokes 🤦🏻 ")
         os.remove(namaFile)
-
+        
+# KUNCI GITAAAAAR
+@bot.message_handler(commands=['crdGuitar'])
+def jokes(message):
+    try:
+        inputtan = message.text
+        masukan  = inputtan[11:]
+        print(masukan)
+        url = urlopen(
+            f"https://hadi-api.herokuapp.com/api/chord?q={masukan}")
+        dokumen = url.read().decode("utf-8")
+        data = json.loads(dokumen)
+        link = data['result']
+        print(link)
+        bot.reply_to(message, str(link))
+    except:
+        bot.reply_to(message, "tidak dapat menemukan chord gitar 🤦🏻 ")
 
 
 
