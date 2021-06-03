@@ -369,7 +369,7 @@ for i in alphabet: #API LINK : https://rapidapi.com/farish978/api/ai-chatbot/pri
         if masukan not in listMenu:
             aibot(masukan, nama, message)
         else:
-            break
+               break
 
 
 def aibot(pesan, name, tujuan):
