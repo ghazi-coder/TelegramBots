@@ -61,7 +61,7 @@ Kritik dan Saran ; /masukan
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
 listMenu = ['/test','/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
-    'https://www.instagram.com/tv', 'https://www.tiktok.com/','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
+    'https://www.instagram.com/tv','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
            ]
 
 
@@ -266,9 +266,12 @@ def downloadig(message):
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
 # TIKTOK vIDEO
+@bot.message_handler(commands=['tiktokVid'])
+def downloadig(message):
+    bot.reply_to(message, "Paste aja linknya di chat...")
 
 
-@bot.message_handler(regexp='https://www.tiktok.com/')
+@bot.message_handler(regexp='https://vt.tiktok.com/')
 def downloadvidtiktok(message):
     try:
         masukan = message.text
