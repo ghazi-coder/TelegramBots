@@ -439,9 +439,10 @@ def aibot(pesan, name, tujuan):
         }
         response = requests.request(
             "GET", url, headers=headers, params=querystring)
-        bot.reply_to(tujuan, out)
+        
         data = json.loads(response.text)
         out = data['chatbot']['response']
+        bot.reply_to(tujuan, out)
     except:
         bot.reply_to(tujuan, "Sorry, I can't read emoticons 😕")
 
