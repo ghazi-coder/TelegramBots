@@ -15,7 +15,7 @@ from bs4 import BeautifulSoup
 import random
 #
 import os
-bot = telebot.TeleBot("1718369489:AAFurcwtMU-qped3oXaYMO1el0jCp5J6Qh8")
+bot = telebot.TeleBot("1857480052:AAGyNqGpLL7wQ1YiRN313ISiqy4lrcOs49w")
 
 #PERINTAH /MENU
 
@@ -368,6 +368,8 @@ for i in alphabet: #API LINK : https://rapidapi.com/farish978/api/ai-chatbot/pri
         log(message, masukan)
         if masukan not in listMenu:
             aibot(masukan, nama, message)
+        else:
+            break
 
 
 def aibot(pesan, name, tujuan):
