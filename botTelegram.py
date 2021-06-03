@@ -1,5 +1,3 @@
-#modul bot telegram
-
 
 import telebot
 from telebot import types
@@ -15,7 +13,7 @@ from bs4 import BeautifulSoup
 import random
 #
 import os
-bot = telebot.TeleBot("1857480052:AAGyNqGpLL7wQ1YiRN313ISiqy4lrcOs49w")
+bot = telebot.TeleBot("1718369489:AAFurcwtMU-qped3oXaYMO1el0jCp5J6Qh8")
 
 #PERINTAH /MENU
 
@@ -25,42 +23,40 @@ def menu(message):
     nama = message.from_user.first_name
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa ana lakukan
 🔰/menu        > Perintah yg dapat dilakukan Bot
-
 1️⃣ ISLAMIC✨
 /sholat namakota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 Contoh = /sholat bandaaceh
 /hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
-
 2️⃣ ARTIFICIAL INTELIGENCE 🧠
 -🗣 Bot dilengkapi dengan auto respon, cocok digunakan untuk partner berbahasa inggris
-
 3️⃣ MEDIA 📺
 /cov19 > Melihat update kasus covid🦠 INDONESIA
 /cuaca nama kota > Melihat Perkiraan Cuaca Terkini
 Contoh = /cuaca Banda Aceh
 /news > Update Hadline News media Indonesia
-
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
 /tiktokVid > Unduh video TikTok tanpa watermark
+
+5️⃣ AKADEMIK 🏫
+/tulis text > bot tulis
 
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari
 Contoh = /sceanime saturday
 note : nama hari harus dalam bahasa INGGRES
 
-/tulis text > bot tulis
-
-kyaaa...!
 
 Kritik dan Saran ; /masukan
 ''')
     idP = message.chat.id
     log(message, f"/MENU id : {idP}")
 
-                  #Allail       #Adek       #kakSela    #Fenny
-listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100 ]
-listMenu = ['/menu','/sholat','/hadist','/cuaca','/news','/igvid','https://www.instagram.com/p','https://www.instagram.com/tv','https://www.tiktok.com/','/tiktokVid','/sceanime','/tulis']
+                 #Allail       #Adek       #kakSela    #Fenny
+listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
+listMenu = ['/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p',
+    'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime']
+
 
 def kirimPesan(idPengguna):
     out = "DEEKKK, KALAU MAU DOWNLOAD VIDEO IG\nGAUSAH CLICK LAGI MENUNYA YAW\nSEKARANG UDAH BISA LANGSUNG PASTE LINKNYA DI CHAT\n'seperti yang anda inginkan\n\n\n #FROM DEVELOPER'"
@@ -68,25 +64,32 @@ def kirimPesan(idPengguna):
     print('pesan berhasil terkirim')
 #kirimPesan(1228610226)
 #START
+
+
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
-    nama   = message.from_user.first_name
-    out    = f"Halo {nama} ana sekarang adalah Ajudan Pribadi antum\nLihat apa yang bisa ana lakukan untuk antum 'click = /menu' "
+    nama = message.from_user.first_name
+    out = f"Halo {nama} ana sekarang adalah Ajudan Pribadi antum\nLihat apa yang bisa ana lakukan untuk antum 'click = /menu' "
     markup = types.ReplyKeyboardMarkup()
-    item   = types.KeyboardButton('/menu')
+    item = types.KeyboardButton('/menu')
     markup.row(item)
-    bot.reply_to(message, out, reply_markup = markup)
+    bot.reply_to(message, out, reply_markup=markup)
    # idP = message.chat.id
     #log(message, f"/start id : {idP}")
+
 
 @bot.message_handler(commands=['masukan'])
 def helpp(message):
     markup = types.InlineKeyboardMarkup()
-    item   = types.InlineKeyboardButton('Message Developer 🧑🏻‍💻', url='https://telegram.me/Qadrillah')
+    item = types.InlineKeyboardButton(
+        'Message Developer 🧑🏻‍💻', url='https://telegram.me/Qadrillah')
     markup.row(item)
-    bot.send_message(message.chat.id, 'Click tombol dibawah ini ya..', reply_markup=markup)
+    bot.send_message(
+        message.chat.id, 'Click tombol dibawah ini ya..', reply_markup=markup)
     log(message, "masukan")
 #RIWAYAT PENGGUNA
+
+
 def log(message, perintah):
     jam = time.strftime('%H')  # : %M : %S'
     jam = int(jam)+7
@@ -104,24 +107,24 @@ def log(message, perintah):
     log_bot.close()
     print(text)
 
-    
-    
+
 #                                                                   1️⃣ ISLAMIC ✨
 
-@bot.message_handler(commands=['sholat']) #sumber API : https://aladhan.com/prayer-times-api#GetTimingsByCity
+# sumber API : https://aladhan.com/prayer-times-api#GetTimingsByCity
+@bot.message_handler(commands=['sholat'])
 def send_welcome(message):
     try:
         masukan = message.text
-        lis     = "%20".join(masukan.split(' '))
-        kota    = lis[8:]
-        pesan   = kota.lower()
+        lis = "%20".join(masukan.split(' '))
+        kota = lis[8:]
+        pesan = kota.lower()
 
-        url =  urlopen(f"http://api.aladhan.com/v1/timingsByCity?city={pesan}&country=indonesia&method=8")
+        url = urlopen(
+            f"http://api.aladhan.com/v1/timingsByCity?city={pesan}&country=indonesia&method=8")
         dokumen = url.read().decode("utf-8")
         data = json.loads(dokumen)
 
-
-        letakData = data['data']  #DATA SHOLAT
+        letakData = data['data']  # DATA SHOLAT
         result = letakData['timings']
         out = f"""Jadwal Sholat 🕌
 🌑 Imsyak  {result['Imsak']}
@@ -136,24 +139,24 @@ def send_welcome(message):
         bot.reply_to(message, out)
     except:
         bot.reply_to(message, "Kota tidak ditemukan 😭")
-        
+
+
 @bot.message_handler(commands=['hadist'])
 def hadits(message):
-    
-    x = random.randint(1,7008)
+
+    x = random.randint(1, 7008)
     url = urlopen(
         f"http://api.carihadis.com/?kitab=Shahih_Bukhari&id={x}")
     dokumen = url.read().decode("utf-8")
     data = json.loads(dokumen)
 
-    no   = data['data']['1']['id']
+    no = data['data']['1']['id']
     nass = data['data']['1']['nass']
     terjemahan = data['data']['1']['terjemah']
     out = f"No Hadist {no}\n{nass}\n{terjemahan}"
     bot.reply_to(message, out)
-        
-        
-        
+
+
 #                                       MEDIA
 
 #PERINTAH MELHAT PRAKIRAAN CUACA
@@ -186,23 +189,25 @@ def send_welcome(message):
         out = "Kota Tidak Ditemukan\n(Bisa jadi kesalahan dalam penulisan nama kota)🤔"
         bot.reply_to(message, out)
     del(pesan)
+
+
 @bot.message_handler(commands=['cov19'])
 def jadwalRilis(message):
     url = urlopen(
-            f"https://covid19.mathdro.id/api/countries/ID"
-        )
-        #baca dokumen
+        f"https://covid19.mathdro.id/api/countries/ID"
+    )
+       #baca dokumen
     dokumen = url.read().decode("utf-8")
     data = json.loads(dokumen)
-    positif   = int(data['confirmed']['value'])
-    sembuh    = data['recovered']['value']
+    positif = int(data['confirmed']['value'])
+    sembuh = data['recovered']['value']
     meninggal = data['deaths']['value']
-    update    = data['lastUpdate']
-    time      = update[:16]
-    out    = "Kasus Covid-19 🇲🇨\n\nPositif         : {:,}\nSembuh      : {:,}\nMeninggoi  : {:,}\n\nUpdate pada {}\nJangan lupa pakai masker😷".format(positif, sembuh, meninggal, time)
+    update = data['lastUpdate']
+    time = update[:16]
+    out = "Kasus Covid-19 🇲🇨\n\nPositif         : {:,}\nSembuh      : {:,}\nMeninggoi  : {:,}\n\nUpdate pada {}\nJangan lupa pakai masker😷".format(
+        positif, sembuh, meninggal, time)
     log(message, "COVID19")
     bot.reply_to(message, out)
-
 
 
 #                                                    M E D S O S
@@ -211,7 +216,8 @@ def jadwalRilis(message):
 def downloadig(message):
     bot.reply_to(message, "Paste aja linknya di chat...")
 
-@bot.message_handler(regexp = 'https://www.instagram.com/')
+
+@bot.message_handler(regexp='https://www.instagram.com/')
 def downloadig(message):
     try:
         masukan = message.text
@@ -252,6 +258,8 @@ def downloadig(message):
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
 # TIKTOK vIDEO
+
+
 @bot.message_handler(regexp='https://www.tiktok.com/')
 def downloadvidtiktok(message):
     try:
@@ -270,8 +278,8 @@ def downloadvidtiktok(message):
         namaFile = f"{nama}_{akhir[3]}.mp4"
 
         with open(namaFile, 'wb') as f:
-                   for chunk in req.iter_content(chunk_size=8192):
-                        f.write(chunk)
+                  for chunk in req.iter_content(chunk_size=8192):
+                       f.write(chunk)
         f.close()
         time.sleep(4)
         out = open(namaFile, 'rb')
@@ -280,9 +288,9 @@ def downloadvidtiktok(message):
         out.close()
         log(message, f"TIKTOK Video {video}")
     except:
-        bot.reply_to(message, "Tidak dapat mengunduh video 😭")     
-        
-        
+        bot.reply_to(message, "Tidak dapat mengunduh video 😭")
+
+
 #PERINTAH BERITA HEADLINE MEDIA INDONESIA
 @bot.message_handler(commands=['news'])
 def send_welcome(message):
@@ -313,7 +321,6 @@ def send_welcome(message):
     del(list)
     del(kya)
 
-    
 
 #                                                           ANIME
 
@@ -355,63 +362,88 @@ def jadwalRilis(message):
     except:
         bot.reply_to(message, "Anime Tydack ditemukan 🤦🏻 ")
 
+
+                                                    # BOT TULIS
+
+@bot.message_handler(commands=['tulis'])
+def tulis1(message):
+    try:
+        masukan = message.text
+        bot.reply_to(message, "Sabar wahai orang malass...")
+        link = masukan[7:]
+        url = f"https://hadi-api.herokuapp.com/api/nulis?teks={link}"
         
+        nama = message.from_user.first_name
+        namaFile = f'{nama}.jpg'
+        img_data = requests.get(url).content
+        with open(f'{namaFile}', 'wb') as handler:
+            handler.write(img_data)
+            handler.close()
+        time.sleep(2)
+        out = open(namaFile, 'rb')
+        bot.send_photo(message.chat.id, out)
+        out.close()
+        log(message, f"Bot tulis 1")
+        os.remove(namaFile)
+    except:
+        bot.reply_to(message, "tidak dapat menulis 🤦🏻 ")
+        os.remove(namaFile)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 #                                                           BOT A I
 
-alphabet = ['q','w','e','r','t','y','u','i','i','o','p','a','s','d','f','g','h','j','k','l','z','x','c','v','b','n','m']
+alphabet = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'i', 'o', 'p', 'a',
+            's', 'd', 'f', 'g', 'h', 'j', 'k', 'l', 'z', 'x', 'c', 'v', 'b', 'n', 'm']
 
-for i in alphabet: #API LINK : https://rapidapi.com/farish978/api/ai-chatbot/pricing
-    @bot.message_handler(regexp = i)
+for i in alphabet:  # API LINK : https://rapidapi.com/farish978/api/ai-chatbot/pricing
+    @bot.message_handler(regexp=i)
     def autoRespon(message):
         masukan = message.text
         nama = message.from_user.first_name
         log(message, masukan)
         if masukan not in listMenu:
             aibot(masukan, nama, message)
-        
-               
 
 
 def aibot(pesan, name, tujuan):
     try:
         url = "https://ai-chatbot.p.rapidapi.com/chat/free"
 
-        querystring = {"message": pesan,"uid": name}
+        querystring = {"message": pesan, "uid": name}
 
         headers = {
-                'x-rapidapi-key': "c8144b94aamsh08b5fb4cfc6382dp18a232jsn078223838e9c",
-                'x-rapidapi-host': "ai-chatbot.p.rapidapi.com"
-                }
-        response = requests.request("GET", url, headers=headers, params=querystring)
-        data = json.loads(response.text)
-        out  = data['chatbot']['response']
+            'x-rapidapi-key': "c8144b94aamsh08b5fb4cfc6382dp18a232jsn078223838e9c",
+            'x-rapidapi-host': "ai-chatbot.p.rapidapi.com"
+        }
+        response = requests.request(
+            "GET", url, headers=headers, params=querystring)
         bot.reply_to(tujuan, out)
+        data = json.loads(response.text)
+        out = data['chatbot']['response']
     except:
         bot.reply_to(tujuan, "Sorry, I can't read emoticons 😕")
-
-        # BOT TULIS
-@bot.message_handler(commands=['tulis'])
-def tulis1(message):
-    masukan = message.text
-    bot.reply_to(message, 'contoh - contoh orang malas\nhehehe...')
-    list = masukan.split(' ')
-    link = list[1:]
-    url = f"https://hadi-api.herokuapp.com/api/nulis?teks={masukan}"
-
-    nama = message.from_user.first_name
-    namaFile = f'{nama}.jpg'
-    img_data = requests.get(url).content
-    with open(f'{namaFile}', 'wb') as handler:
-        handler.write(img_data)
-        handler.close()
-
-    out = open(namaFile, 'rb')
-    bot.send_photo(message, out)
-    out.close()
-    log(message, f"Bot tulis 1")
-    time.sleep(1)
-    os.remove(namaFile)        
-
 
 print("Bot Running...")
 bot.polling()
