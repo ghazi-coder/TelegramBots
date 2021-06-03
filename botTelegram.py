@@ -271,7 +271,18 @@ def downloadig(message):
 @bot.message_handler(regexp='https://www.tiktok.com/')
 def downloadvidtiktok(message):
     try:
-        link = message.text
+        masukan = message.text
+        url = urlopen(masukan)
+        dokumen = url.read().decode("utf-8")
+            # Buka HTML
+        soup      = BeautifulSoup(dokumen, 'html.parser')
+        data      = str(soup)
+        split1    = data.split("><")
+        ambillist = split1[44]
+
+        ambilurl = ambillist.split("""" """)[1]
+        link     = ambilurl[6:]        
+        
         bot.send_message(message.chat.id, "Sabarr Boss...")
         url = urlopen(
             f"https://backend-ihsandevs.herokuapp.com/api/TikTok%20Downloader/?url_video={link}&utm_source=beamer&utm_medium=sidebar&utm_campaign=API-TikTok-Downloader&utm_content=ctalink")
