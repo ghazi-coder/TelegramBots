@@ -24,7 +24,7 @@ def menu(message):
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
 🔰/menu        > Perintah yg dapat dilakukan Bot
 
-1️⃣ ISLAMIC✨
+1️⃣ **ISLAMIC** ✨
 /sholat nama kota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 /hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
 
@@ -59,7 +59,7 @@ Kritik dan Saran ; /masukan
 
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
-listMenu = ['/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p',
+listMenu = ['/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
     'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
            ]
 
@@ -370,8 +370,27 @@ def jadwalRilis(message):
         bot.reply_to(message, "Anime Tydack ditemukan 🤦🏻 ")
 
 
-                                                    # BOT TULIS
+        #                                                                   E D U C A T I O N
+#WIKI
+@bot.message_handler(commands=['wiki'])
+def jokes(message):
+    try:
+        inputtan = message.text
+        list = "%20".join(inputtan.split(' '))
+        masukan = list[8:]
+        print(masukan)
+        url = urlopen(
+            f"https://hadi-api.herokuapp.com/api/wiki?query={masukan}")
+        dokumen = url.read().decode("utf-8")
+        data = json.loads(dokumen)
 
+        link = data['result']
+        bot.reply_to(message, str(link))
+    except:
+        bot.reply_to(message, f"'{masukan}' tidak ditemukan di wikipedia 🤦🏻")
+
+        
+ # BOT TULIS
 @bot.message_handler(commands=['tulis'])
 def tulis1(message):
     try:
