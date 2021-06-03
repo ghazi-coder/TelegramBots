@@ -437,8 +437,8 @@ def jokes(message):
             f"https://hadi-api.herokuapp.com/api/chord?q={masukan}")
         dokumen = url.read().decode("utf-8")
         data = json.loads(dokumen)
+        time.sleep(2)
         link = data['result']
-        print(link)
         bot.reply_to(message, str(link))
     except:
         bot.reply_to(message, "tidak dapat menemukan chord gitar 🤦🏻 ")
