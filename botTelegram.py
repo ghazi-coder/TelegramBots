@@ -21,25 +21,30 @@ bot = telebot.TeleBot("1857480052:AAGyNqGpLL7wQ1YiRN313ISiqy4lrcOs49w")
 @bot.message_handler(commands=['menu'])
 def menu(message):
     nama = message.from_user.first_name
-    bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa ana lakukan
+    bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
 🔰/menu        > Perintah yg dapat dilakukan Bot
+
 1️⃣ ISLAMIC✨
-/sholat namakota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
-Contoh = /sholat bandaaceh
+/sholat nama kota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 /hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
+
 2️⃣ ARTIFICIAL INTELIGENCE 🧠
 -🗣 Bot dilengkapi dengan auto respon, cocok digunakan untuk partner berbahasa inggris
+
 3️⃣ MEDIA 📺
 /cov19 > Melihat update kasus covid🦠 INDONESIA
 /cuaca nama kota > Melihat Perkiraan Cuaca Terkini
-Contoh = /cuaca Banda Aceh
 /news > Update Hadline News media Indonesia
+
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
 /tiktokVid > Unduh video TikTok tanpa watermark
 
 5️⃣ AKADEMIK 🏫
 /tulis text > bot tulis
+
+OTHER
+/jokes > jokes random
 
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari
@@ -55,7 +60,8 @@ Kritik dan Saran ; /masukan
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
 listMenu = ['/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p',
-    'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime']
+    'https://www.instagram.com/tv', 'https://www.tiktok.com/', '/tiktokVid', '/sceanime','/jokes'
+           ]
 
 
 def kirimPesan(idPengguna):
@@ -390,6 +396,34 @@ def tulis1(message):
         os.remove(namaFile)
 
 
+        
+#                                       O  T  H  E  R
+
+#jokes
+@bot.message_handler(commands=['jokes'])
+def jokes(message):
+    try:
+        url = urlopen(f"https://hadi-api.herokuapp.com/api/darkjokes")
+        dokumen = url.read().decode("utf-8")
+        data = json.loads(dokumen)
+        link = data['result']
+
+        nama = message.from_user.first_name
+        namaFile = f'{nama}jokes.jpg'
+        img_data = requests.get(link).content
+        with open(f'{namaFile}', 'wb') as handler:
+            handler.write(img_data)
+            handler.close()
+
+        time.sleep(0.5)
+        out = open(namaFile, 'rb')
+        bot.send_photo(message.chat.id, out)
+        out.close()
+        log(message, f"Jokes")
+        os.remove(namaFile)
+    except:
+        bot.reply_to(message, "tidak dapat menampilkan jokes 🤦🏻 ")
+        os.remove(namaFile)
 
 
 
@@ -422,7 +456,7 @@ for i in alphabet:  # API LINK : https://rapidapi.com/farish978/api/ai-chatbot/p
     def autoRespon(message):
         masukan = message.text
         nama = message.from_user.first_name
-        log(message, masukan)
+        log(message, f'AI-{masukan}')
         if masukan not in listMenu:
             aibot(masukan, nama, message)
 
