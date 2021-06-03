@@ -34,7 +34,7 @@ def menu(message):
 3️⃣ MEDIA 📺
 /cov19 > Melihat update kasus covid🦠 INDONESIA
 /cuaca nama kota > Melihat Perkiraan Cuaca Terkini
-/news > Update Hadline News media Indonesia
+/news > Update Headline News media Indonesia
 
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
@@ -48,9 +48,8 @@ def menu(message):
 /crdGuitar nama lagu > Kunci gitar 
 
 ⚠️ WEEBS AREA
-/sceanime day > Jadwal rilis anime berdasarkan hari
-Contoh = /sceanime saturday
-note : nama hari harus dalam bahasa INGGRES
+/sceanime day > Jadwal rilis anime berdasarkan hari dalam bahasa inggris
+
 
 
 Kritik dan Saran ; /masukan
@@ -428,21 +427,21 @@ def jokes(message):
         
 # KUNCI GITAAAAAR
 @bot.message_handler(commands=['crdGuitar'])
-def jokes(message):
+def chordGuitar(message):
     try:
         inputtan = message.text
-        masukan  = inputtan[11:]
+        list   = "%20".join(inputtan.split(' '))
+        masukan = list[13:]
         print(masukan)
         url = urlopen(
             f"https://hadi-api.herokuapp.com/api/chord?q={masukan}")
         dokumen = url.read().decode("utf-8")
         data = json.loads(dokumen)
-        time.sleep(2)
         link = data['result']
+        print(link)
         bot.reply_to(message, str(link))
     except:
-        bot.reply_to(message, "tidak dapat menemukan chord gitar 🤦🏻 ")
-
+        bot.reply_to(message, "tidak dapat menemukan chord gitar 🤦🏻 
 
 
 
