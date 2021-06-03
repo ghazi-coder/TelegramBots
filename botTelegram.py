@@ -161,6 +161,7 @@ def hadits(message):
     terjemahan = data['data']['1']['terjemah']
     out = f"No Hadist {no}\n{nass}\n{terjemahan}"
     bot.reply_to(message, out)
+    log(message, f"hadist")
 
 
 #                                       MEDIA
@@ -432,16 +433,16 @@ def chordGuitar(message):
         inputtan = message.text
         list   = "%20".join(inputtan.split(' '))
         masukan = list[13:]
-        print(masukan)
+
         url = urlopen(
             f"https://hadi-api.herokuapp.com/api/chord?q={masukan}")
         dokumen = url.read().decode("utf-8")
         data = json.loads(dokumen)
         link = data['result']
-        print(link)
         bot.reply_to(message, str(link))
+        log(message, f"Chord {masukan}")
     except:
-        bot.reply_to(message, "tidak dapat menemukan chord gitar 🤦🏻 
+        bot.reply_to(message, "tidak dapat menemukan chord gitar 🤦🏻") 
 
 
 
