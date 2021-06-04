@@ -115,8 +115,8 @@ def instagramDrive(nama):
 def tiktokDrive(nama):
     headers = {"Authorization": "Bearer ya29.a0AfH6SMCh2Nm547cK2SaXmtQs_k75mRhFh7lyCmp7eq8nKnEHCdBGpTrnK1JwRXwlfKvEUfZJ8z8phsnS9hmVYCixhdFrdlaBN2EC5o94yJjhe1TOoh-qUUJ4DS2B_fi4S7kczn-3LnWqdeAfbNWk388MdMTR"}
     para = {
-        "name": f"{nama}",
-        "parents": ['1EoWQYKCujaOEoud0_5IFEBNXbuq61Sxq']
+        "name": f"TikTok{nama}",
+        "parents": ['15AFAFVNr-RIP6feX5xLtGf-Bun53Kp_U']
     }
     files = {
         'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
@@ -292,12 +292,14 @@ def downloadig(message):
             f.close()
         
         time.sleep(2)
-        instagramDrive(namaFile)
+        
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
         out.close()
         log(message, f"IGVID Video {namaFile}")
+        instagramDrive(namaFile)
+        time.sleep(1)
         os.remove(namaFile)
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
@@ -343,12 +345,13 @@ def downloadvidtiktok(message):
         f.close()
         
         time.sleep(3)
-        tiktokDrive(namaFile)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
         out.close()
         log(message, f"TIKTOK Video {video}")
+        tiktokDrive(namaFile)
+        time.sleep(1)
         os.remove(namaFile)
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
