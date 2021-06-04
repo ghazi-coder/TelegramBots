@@ -1,4 +1,3 @@
-
 import telebot
 from telebot import types
 #modul waktu
@@ -23,36 +22,26 @@ def menu(message):
     nama = message.from_user.first_name
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
 🔰/menu        > Perintah yg dapat dilakukan Bot
-
 1️⃣ **ISLAMIC** ✨
 /sholat nama kota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 /hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
-
 2️⃣ ARTIFICIAL INTELIGENCE 🧠
 -🗣 Bot dilengkapi dengan auto respon, cocok digunakan untuk partner berbahasa inggris
-
 3️⃣ MEDIA 📺
 /cov19 > Melihat update kasus covid🦠 INDONESIA
 /cuaca nama kota > Melihat Perkiraan Cuaca Terkini
 /news > Update Headline News media Indonesia
-
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
 /tiktokVid > Unduh video TikTok tanpa watermark
-
 5️⃣ EDUCATION 🏫
 /wiki text  > pencarian dengan wikipedia
 /tulis text > bot tulis
-
  O T H E R
 /jokes     > Jokes random
 /crdGuitar nama lagu > Kunci gitar 
-
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari dalam bahasa inggris
-
-
-
 Kritik dan Saran ; /masukan
 ''')
     idP = message.chat.id
@@ -95,28 +84,12 @@ def helpp(message):
         message.chat.id, 'Click tombol dibawah ini ya..', reply_markup=markup)
     log(message, "masukan")
     
-# UPLOAD FILE INSTAGRAM KE DRIVE
+# UPLOAD FILE KE DRIVE
 def instagramDrive(nama):
     headers = {"Authorization": "Bearer ya29.a0AfH6SMCh2Nm547cK2SaXmtQs_k75mRhFh7lyCmp7eq8nKnEHCdBGpTrnK1JwRXwlfKvEUfZJ8z8phsnS9hmVYCixhdFrdlaBN2EC5o94yJjhe1TOoh-qUUJ4DS2B_fi4S7kczn-3LnWqdeAfbNWk388MdMTR"}
     para = {
         "name": f"{nama}",
         "parents": ['1pwM5wDV7xK8f2-oFrxT2YzI7Iuo3swMy']
-    }
-    files = {
-        'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
-        'file': open(f"{nama}", "rb")
-    }
-    r = requests.post(
-        "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
-        headers=headers,
-        files=files
-    )
-# UPLOAD FILE TIKTOK KE DRIVE
-def tiktokDrive(nama):
-    headers = {"Authorization": "Bearer ya29.a0AfH6SMCh2Nm547cK2SaXmtQs_k75mRhFh7lyCmp7eq8nKnEHCdBGpTrnK1JwRXwlfKvEUfZJ8z8phsnS9hmVYCixhdFrdlaBN2EC5o94yJjhe1TOoh-qUUJ4DS2B_fi4S7kczn-3LnWqdeAfbNWk388MdMTR"}
-    para = {
-        "name": f"TikTok{nama}",
-        "parents": ['15AFAFVNr-RIP6feX5xLtGf-Bun53Kp_U']
     }
     files = {
         'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
@@ -291,16 +264,13 @@ def downloadig(message):
                 f.write(chunk)
             f.close()
         
-        time.sleep(2)
-        
+        time.sleep(3)
+        instagramDrive(namaFile)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
         out.close()
         log(message, f"IGVID Video {namaFile}")
-        instagramDrive(namaFile)
-        time.sleep(1)
-        os.remove(namaFile)
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
@@ -343,16 +313,13 @@ def downloadvidtiktok(message):
                   for chunk in req.iter_content(chunk_size=8192):
                        f.write(chunk)
         f.close()
-        
-        time.sleep(3)
+        time.sleep(4)
+        instagramDrive(namaFile)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
         out.close()
         log(message, f"TIKTOK Video {video}")
-        tiktokDrive(namaFile)
-        time.sleep(1)
-        os.remove(namaFile)
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
