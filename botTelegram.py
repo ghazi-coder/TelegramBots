@@ -22,26 +22,35 @@ def menu(message):
     nama = message.from_user.first_name
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
 🔰/menu        > Perintah yg dapat dilakukan Bot
-1️⃣ **ISLAMIC** ✨
+
+1️⃣ ISLAMIC ✨
 /sholat nama kota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 /hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
+
 2️⃣ ARTIFICIAL INTELIGENCE 🧠
--🗣 Bot dilengkapi dengan auto respon, cocok digunakan untuk partner berbahasa inggris
+-🗣 Bot dilengkapi dengan auto respon berbahasa inggris
+
 3️⃣ MEDIA 📺
 /cov19 > Melihat update kasus covid🦠 INDONESIA
 /cuaca nama kota > Melihat Perkiraan Cuaca Terkini
 /news > Update Headline News media Indonesia
+
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
 /tiktokVid > Unduh video TikTok tanpa watermark
+
 5️⃣ EDUCATION 🏫
 /wiki text  > pencarian dengan wikipedia
 /tulis text > bot tulis
+
  O T H E R
 /jokes     > Jokes random
 /crdGuitar nama lagu > Kunci gitar 
+
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari dalam bahasa inggris
+
+
 Kritik dan Saran ; /masukan
 ''')
     idP = message.chat.id
@@ -282,7 +291,7 @@ def downloadig(message):
 
 @bot.message_handler(regexp='https://vt.tiktok.com/')
 def downloadvidtiktok(message):
-    
+    try:
         masukan = message.text
         idP = message.chat.id
         url = urlopen(masukan)
@@ -320,7 +329,7 @@ def downloadvidtiktok(message):
         print(message.chat.id)
         out.close()
         log(message, f"TIKTOK Video {video}")
-    
+    except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
 
