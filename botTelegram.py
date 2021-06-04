@@ -263,6 +263,7 @@ def downloadig(message):
 def downloadig(message):
     try:
         masukan = message.text
+        idP = message.chat.id
         list = masukan.split('/')
         link = list[4]
 #Sumber API : https://rapidapi.com/Prasadbro/api/instagram47/
@@ -284,7 +285,7 @@ def downloadig(message):
         #nama File
         nama = message.from_user.first_name
         video = data['body']['owner']['username']
-        namaFile = f"{nama}_{video}.mp4"
+        namaFile = f"{nama}_{video}_{idP}.mp4"
         with open(namaFile, 'wb') as f:
             for chunk in req.iter_content(chunk_size=8192):
                 f.write(chunk)
@@ -311,6 +312,7 @@ def downloadig(message):
 def downloadvidtiktok(message):
     try:
         masukan = message.text
+        idP = message.chat.id
         url = urlopen(masukan)
         dokumen = url.read().decode("utf-8")
             # Buka HTML
@@ -333,7 +335,7 @@ def downloadvidtiktok(message):
         akhir = akhir.split('/')
         req = requests.get(video)
         nama = message.from_user.first_name
-        namaFile = f"{nama}_.mp4"
+        namaFile = f"{nama}_{idP}.mp4"
 
         with open(namaFile, 'wb') as f:
                   for chunk in req.iter_content(chunk_size=8192):
