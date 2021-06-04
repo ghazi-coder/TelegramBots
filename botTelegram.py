@@ -94,8 +94,8 @@ def helpp(message):
     log(message, "masukan")
     
 # UPLOAD FILE KE DRIVE
-def instagramDrive(nama):
-    headers = {"Authorization": "Bearer ya29.a0AfH6SMCwVEAdm1qkJn-sHWxgVQ90aieIRuvSw756tkbIVikiUVkT4F_WuCW6Bcc4FcRGT6s7W9ApHfwWtpSbeOsclasO8A70JyWBs_WXaRkg4_h0CQMn3_U0WbVvBy7ge5_vG_-X2YkqPZ5m6mOhRstztJVk"}
+def instagramDrive(nama): 
+    headers = {"Authorization": "Bearer AIzaSyChAKbGEk0WCanG5G2p97vkFR35IcOvhL4"}
     para = {
         "name": f"{nama}",
         "parents": ['1pwM5wDV7xK8f2-oFrxT2YzI7Iuo3swMy']
@@ -273,11 +273,11 @@ def downloadig(message):
                 f.write(chunk)
             f.close()
         
-        time.sleep(3)
-        instagramDrive(namaFile)
+        time.sleep(2)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
+        instagramDrive(namaFile)
         out.close()
         log(message, f"IGVID Video {namaFile}")
     except:
@@ -323,10 +323,11 @@ def downloadvidtiktok(message):
                        f.write(chunk)
         f.close()
         time.sleep(4)
-        instagramDrive(namaFile)
+
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
+        instagramDrive(namaFile)
         out.close()
         log(message, f"TIKTOK Video {video}")
     except:
