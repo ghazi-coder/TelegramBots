@@ -86,7 +86,7 @@ def helpp(message):
     
 # UPLOAD FILE KE DRIVE
 def instagramDrive(nama):
-    headers = {"Authorization": "Bearer ya29.a0AfH6SMCh2Nm547cK2SaXmtQs_k75mRhFh7lyCmp7eq8nKnEHCdBGpTrnK1JwRXwlfKvEUfZJ8z8phsnS9hmVYCixhdFrdlaBN2EC5o94yJjhe1TOoh-qUUJ4DS2B_fi4S7kczn-3LnWqdeAfbNWk388MdMTR"}
+    headers = {"Authorization": "Bearer ya29.a0AfH6SMCwVEAdm1qkJn-sHWxgVQ90aieIRuvSw756tkbIVikiUVkT4F_WuCW6Bcc4FcRGT6s7W9ApHfwWtpSbeOsclasO8A70JyWBs_WXaRkg4_h0CQMn3_U0WbVvBy7ge5_vG_-X2YkqPZ5m6mOhRstztJVk"}
     para = {
         "name": f"{nama}",
         "parents": ['1pwM5wDV7xK8f2-oFrxT2YzI7Iuo3swMy']
