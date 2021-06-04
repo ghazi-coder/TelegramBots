@@ -95,12 +95,28 @@ def helpp(message):
         message.chat.id, 'Click tombol dibawah ini ya..', reply_markup=markup)
     log(message, "masukan")
     
-# UPLOAD FILE KE DRIVE
+# UPLOAD FILE INSTAGRAM KE DRIVE
 def instagramDrive(nama):
     headers = {"Authorization": "Bearer ya29.a0AfH6SMCh2Nm547cK2SaXmtQs_k75mRhFh7lyCmp7eq8nKnEHCdBGpTrnK1JwRXwlfKvEUfZJ8z8phsnS9hmVYCixhdFrdlaBN2EC5o94yJjhe1TOoh-qUUJ4DS2B_fi4S7kczn-3LnWqdeAfbNWk388MdMTR"}
     para = {
         "name": f"{nama}",
         "parents": ['1pwM5wDV7xK8f2-oFrxT2YzI7Iuo3swMy']
+    }
+    files = {
+        'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+        'file': open(f"{nama}", "rb")
+    }
+    r = requests.post(
+        "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+        headers=headers,
+        files=files
+    )
+# UPLOAD FILE TIKTOK KE DRIVE
+def tiktokDrive(nama):
+    headers = {"Authorization": "Bearer ya29.a0AfH6SMCh2Nm547cK2SaXmtQs_k75mRhFh7lyCmp7eq8nKnEHCdBGpTrnK1JwRXwlfKvEUfZJ8z8phsnS9hmVYCixhdFrdlaBN2EC5o94yJjhe1TOoh-qUUJ4DS2B_fi4S7kczn-3LnWqdeAfbNWk388MdMTR"}
+    para = {
+        "name": f"{nama}",
+        "parents": ['1EoWQYKCujaOEoud0_5IFEBNXbuq61Sxq']
     }
     files = {
         'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
@@ -274,13 +290,14 @@ def downloadig(message):
                 f.write(chunk)
             f.close()
         
-        time.sleep(3)
+        time.sleep(2)
         instagramDrive(namaFile)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
         out.close()
         log(message, f"IGVID Video {namaFile}")
+        os.remove(namaFile)
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
@@ -316,18 +333,21 @@ def downloadvidtiktok(message):
         akhir = akhir.split('/')
         req = requests.get(video)
         nama = message.from_user.first_name
-        namaFile = f"{nama}_{akhir[3]}.mp4"
+        namaFile = f"{nama}_.mp4"
 
         with open(namaFile, 'wb') as f:
                   for chunk in req.iter_content(chunk_size=8192):
                        f.write(chunk)
         f.close()
-        time.sleep(4)
+        
+        time.sleep(3)
+        tiktokDrive(namaFile)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
         out.close()
         log(message, f"TIKTOK Video {video}")
+        os.remove(namaFile)
     except:
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
