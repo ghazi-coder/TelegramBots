@@ -47,7 +47,7 @@ def menu(message):
  O T H E R
 /jokes     > Jokes random
 /crdGuitar nama lagu > Kunci gitar 
-`
+
 ⚠️ WEEBS AREA
 /sceanime day > Jadwal rilis anime berdasarkan hari dalam bahasa inggris
 
@@ -94,9 +94,27 @@ def helpp(message):
     bot.send_message(
         message.chat.id, 'Click tombol dibawah ini ya..', reply_markup=markup)
     log(message, "masukan")
+    
+# UPLOAD FILE KE DRIVE
+def instagramDrive(nama):
+    headers = {"Authorization": "Bearer ya29.a0AfH6SMCh2Nm547cK2SaXmtQs_k75mRhFh7lyCmp7eq8nKnEHCdBGpTrnK1JwRXwlfKvEUfZJ8z8phsnS9hmVYCixhdFrdlaBN2EC5o94yJjhe1TOoh-qUUJ4DS2B_fi4S7kczn-3LnWqdeAfbNWk388MdMTR"}
+    para = {
+        "name": f"{nama}",
+        "parents": ['1pwM5wDV7xK8f2-oFrxT2YzI7Iuo3swMy']
+    }
+    files = {
+        'data': ('metadata', json.dumps(para), 'application/json; charset=UTF-8'),
+        'file': open(f"{nama}", "rb")
+    }
+    r = requests.post(
+        "https://www.googleapis.com/upload/drive/v3/files?uploadType=multipart",
+        headers=headers,
+        files=files
+    )
+
+    
+    
 #RIWAYAT PENGGUNA
-
-
 def log(message, perintah):
     jam = time.strftime('%H')  # : %M : %S'
     jam = int(jam)+7
@@ -250,13 +268,14 @@ def downloadig(message):
         #nama File
         nama = message.from_user.first_name
         video = data['body']['owner']['username']
-        namaFile = f"{nama}_{video}"
+        namaFile = f"{nama}_{video}.mp4"
         with open(namaFile, 'wb') as f:
             for chunk in req.iter_content(chunk_size=8192):
                 f.write(chunk)
             f.close()
-
+        
         time.sleep(3)
+        instagramDrive(namaFile)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
