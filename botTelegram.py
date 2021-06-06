@@ -58,9 +58,9 @@ Kritik dan Saran ; /masukan
 
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
-listMenu = ['/test','/menu','/addFitur', /tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
-    'https://www.instagram.com/tv','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
-           ]
+listMenu = ['/test','/menu','/addFitur', /tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki','https://www.instagram.com/tv','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'] 
+                
+           
 
 
 def kirimPesan(idPengguna):
