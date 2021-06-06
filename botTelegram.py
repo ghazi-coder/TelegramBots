@@ -22,7 +22,7 @@ def menu(message):
     nama = message.from_user.first_name
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
 🔰/menu        > Perintah yg dapat dilakukan Bot
-
+📨/addFitur text > mengirimkan pesan kepada admin untuk menambahkan fitur terbaru
 1️⃣ ISLAMIC ✨
 /sholat nama kota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 /hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
@@ -58,7 +58,7 @@ Kritik dan Saran ; /masukan
 
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
-listMenu = ['/test','/menu','/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
+listMenu = ['/test','/menu','/addFitur', /tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki',
     'https://www.instagram.com/tv','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'
            ]
 
@@ -74,14 +74,21 @@ def kirimPesan(idPengguna):
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
     nama = message.from_user.first_name
-    out = f"Halo {nama} ana sekarang adalah Ajudan Pribadi antum\nLihat apa yang bisa ana lakukan untuk antum 'click = /menu' "
+    out = f"Halo {nama} \nLihat apa yang bisa saya lakukan 'click = /menu' "
     markup = types.ReplyKeyboardMarkup()
     item = types.KeyboardButton('/menu')
     markup.row(item)
+    idP = message.chat.id
     bot.reply_to(message, out, reply_markup=markup)
-   # idP = message.chat.id
+    bot.send_message(1214473324,f"{nama} : {idP} ")
     #log(message, f"/start id : {idP}")
+    
+    
+@bot.message_handler(commands=['addFitur']) 
 
+def send_pesan(message):
+    Pesan = message.text
+    bot.send_message(1214473324,Pesan)
 
 @bot.message_handler(commands=['masukan'])
 def helpp(message):
