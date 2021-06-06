@@ -79,8 +79,9 @@ def send_welcome(message):
     item = types.KeyboardButton('/menu')
     markup.row(item)
     idP = message.chat.id
+    namaLast = message.from_user.last_name
     bot.reply_to(message, out, reply_markup=markup)
-    bot.send_message(1214473324,f"{nama} : {idP} ")
+    bot.send_message(1214473324,f"{nama} {namaLast} : {idP} ")
     #log(message, f"/start id : {idP}")
     
     
@@ -88,7 +89,13 @@ def send_welcome(message):
 
 def send_pesan(message):
     Pesan = message.text
-    bot.send_message(1214473324,Pesan)
+    nama = message.from_user.first_name
+    
+
+    idP = message.chat.id
+    namaLast = message.from_user.last_name
+    out = f"{nama} {namaLast} {idP}\n {Pesan} "
+    bot.send_message(1214473324,out)
 
 @bot.message_handler(commands=['masukan'])
 def helpp(message):
