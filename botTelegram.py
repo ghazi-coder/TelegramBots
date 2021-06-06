@@ -90,6 +90,7 @@ def send_welcome(message):
 def send_pesan(message):
     Pesan = message.text
     nama = message.from_user.first_name
+    bot.reply_to(message, 'Pesan berhasil disampaikan ke admin') 
     
 
     idP = message.chat.id
@@ -287,7 +288,7 @@ def downloadig(message):
                 f.write(chunk)
             f.close()
         
-        time.sleep(2)
+        time.sleep(1)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
         print(message.chat.id)
@@ -336,7 +337,7 @@ def downloadvidtiktok(message):
                   for chunk in req.iter_content(chunk_size=8192):
                        f.write(chunk)
         f.close()
-        time.sleep(4)
+        time.sleep(1)
 
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
