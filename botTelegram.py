@@ -291,8 +291,6 @@ def downloadig(message):
         time.sleep(1)
         out = open(namaFile, 'rb')
         bot.send_video(message.chat.id, out)
-        print(message.chat.id)
-        instagramDrive(namaFile)
         out.close()
         log(message, f"IGVID Video {namaFile}")
     except:
@@ -303,50 +301,67 @@ def downloadig(message):
 def downloadig(message):
     bot.reply_to(message, "Paste aja linknya di chat...")
 
+def kirimVideo(file, alamat):
+    out = open(file, 'rb')
+    bot.send_video(alamat, out)
+    out.close()
+    log(message, f"TIKTOK Video {video}")
+    
 
 @bot.message_handler(regexp='https://vt.tiktok.com/')
 def downloadvidtiktok(message):
-    
+    try:
         masukan = message.text
         idP = message.chat.id
-        url = urlopen(masukan)
-        dokumen = url.read().decode("utf-8")
-            # Buka HTML
-        soup      = BeautifulSoup(dokumen, 'html.parser')
-        data      = str(soup)
-        split1    = data.split("><")
-        ambillist = split1[44]
+  
+        url = "https://tik-tok-feed.p.rapidapi.com/"
 
-        ambilurl = ambillist.split("""" """)[1]
-        link     = ambilurl[6:]        
-        
-        bot.send_message(message.chat.id, "Sabarr Boss...")
-        url = urlopen(
-            f"https://backend-ihsandevs.herokuapp.com/api/TikTok%20Downloader/?url_video={link}&utm_source=beamer&utm_medium=sidebar&utm_campaign=API-TikTok-Downloader&utm_content=ctalink")
-        dokumen = url.read().decode("utf-8")
-        data = json.loads(dokumen)
+        querystring = {"search":f"{masukan}","type":"link"}
+        headers = {
+            'x-rapidapi-key': "c8144b94aamsh08b5fb4cfc6382dp18a232jsn078223838e9c",
+            'x-rapidapi-host': "tik-tok-feed.p.rapidapi.com"
+            }
 
-        video = data['result']['format']['video']
-        akhir = data['result']['thumb']
-        akhir = akhir.split('/')
-        req = requests.get(video)
+        response = requests.request("GET", url, headers=headers, params=querystring)
+        data = json.loads(response.text)
+        video = data['items'][0]['video']['downloadAddr']
+        req  = requests.get(video)
         nama = message.from_user.first_name
         namaFile = f"{nama}_{idP}.mp4"
-
         with open(namaFile, 'wb') as f:
-                  for chunk in req.iter_content(chunk_size=8192):
-                       f.write(chunk)
-        f.close()
-        time.sleep(2)
+                          for chunk in req.iter_content(chunk_size=8192):
+                               f.write(chunk)
+                          f.close()
+        kirimVideo(namaFile, message.chat.id)
+        print('1')
+    except:
+      try:
+        time.sleep(1)
+        kirimVideo(namaFile, message.chat.id)
+        print('2')
+      except:
+        try:
+          time.sleep(0.5)
+          kirimVideo(namaFile, message.chat.id)
+          print('3')
+        except:
+          try:
+             time.sleep(0.5)
+             kirimVideo(namaFile, message.chat.id)
+             print('4')
+          except:
+            try:
+                time.sleep(0.5)
+                kirimVideo(namaFile, message.chat.id)
+                print('5')
+            except:
+              try:
+                  time.sleep(0.5)
+                  kirimVideo(namaFile, message.chat.id)
+        
 
-        out = open(namaFile, 'rb')
-        bot.send_video(message.chat.id, out)
-        print(message.chat.id)
-        instagramDrive(namaFile)
-        out.close()
-        log(message, f"TIKTOK Video {video}")
-    
-        bot.reply_to(message, "Tidak dapat mengunduh video 😭")
+        
+        
 
 
 #PERINTAH BERITA HEADLINE MEDIA INDONESIA
