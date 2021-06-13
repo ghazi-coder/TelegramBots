@@ -358,12 +358,10 @@ def downloadvidtiktok(message):
               try:
                   time.sleep(0.5)
                   kirimVideo(namaFile, message.chat.id)
+              except:
+                  time.sleep(0.5)
+                  kirimVideo(namaFile, message.chat.id)
         
-
-        
-        
-
-
 #PERINTAH BERITA HEADLINE MEDIA INDONESIA
 @bot.message_handler(commands=['news'])
 def send_welcome(message):
