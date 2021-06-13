@@ -306,7 +306,7 @@ def downloadig(message):
 
 @bot.message_handler(regexp='https://vt.tiktok.com/')
 def downloadvidtiktok(message):
-    try:
+    
         masukan = message.text
         idP = message.chat.id
         url = urlopen(masukan)
@@ -345,7 +345,7 @@ def downloadvidtiktok(message):
         instagramDrive(namaFile)
         out.close()
         log(message, f"TIKTOK Video {video}")
-    except:
+    
         bot.reply_to(message, "Tidak dapat mengunduh video 😭")
 
 
