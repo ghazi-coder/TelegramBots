@@ -37,7 +37,7 @@ def menu(message):
 
 4️⃣ MEDSOS 📱
 /igvid > Unduh video dari IG
-/tiktokVid > Unduh video TikTok tanpa watermark
+/tiktokVid > Unduh video TikTok tanpa watermark (masih dalam perbaikan!)
 
 5️⃣ EDUCATION 🏫
 /wiki text  > pencarian dengan wikipedia
@@ -254,11 +254,22 @@ def jadwalRilis(message):
 @bot.message_handler(commands=['igvid'])
 def downloadig(message):
     bot.reply_to(message, "Paste aja linknya di chat...")
-
+    
+def kirim(namaFile, tujuan):
+  while True:
+    try:
+      out = open(namaFile, 'rb')
+      x = bot.send_video(tujuan, out)
+      out.close()
+      
+      if x is not EOFError:
+        break
+    except:
+      continue
 
 @bot.message_handler(regexp='https://www.instagram.com/')
 def downloadig(message):
-    try:
+
         masukan = message.text
         idP = message.chat.id
         list = masukan.split('/')
@@ -282,19 +293,16 @@ def downloadig(message):
         #nama File
         nama = message.from_user.first_name
         video = data['body']['owner']['username']
-        namaFile = f"{nama}_{video}_{idP}.mp4"
+        namaFile = f"{nama}_{video}.mp4"
         with open(namaFile, 'wb') as f:
             for chunk in req.iter_content(chunk_size=8192):
                 f.write(chunk)
             f.close()
+        kirim(namaFile, message.chat.id)
+        log(message, f"igVID {namaFile}")
+
         
-        time.sleep(1)
-        out = open(namaFile, 'rb')
-        bot.send_video(message.chat.id, out)
-        out.close()
-        log(message, f"IGVID Video {namaFile}")
-    except:
-        bot.reply_to(message, "Tidak dapat mengunduh video 😭")
+      
 
 # TIKTOK vIDEO
 @bot.message_handler(commands=['tiktokVid'])
