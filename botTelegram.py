@@ -22,7 +22,8 @@ def menu(message):
     nama = message.from_user.first_name
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
 🔰/menu        > Perintah yg dapat dilakukan Bot
-📨/addFitur text > mengirimkan pesan kepada admin untuk menambahkan fitur terbaru
+📨/saran text > mengirimkan pesan kepada developer
+
 1️⃣ ISLAMIC ✨
 /sholat nama kota > Menampilkan jadwal sholat sesuai dengan kota yang diinput
 /hadist > Menampilkan 7000+ Hadist dari kitab Bukhari secara random
@@ -58,7 +59,7 @@ Kritik dan Saran ; /masukan
 
                  #Allail       #Adek       #kakSela    #Fenny
 listIdPengguna = [1214473324, 1228610226, 1228610226, 1359785100]
-listMenu = ['/test','/menu','/addFitur', '/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki','https://www.instagram.com/tv','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'] 
+listMenu = ['/','/test','/menu','/addFitur', '/tulis', '/sholat', '/hadist', '/cuaca', '/news', '/igvid', 'https://www.instagram.com/p','/wiki','https://www.instagram.com/tv','https://vt.tiktok.com/', '/tiktokVid', '/sceanime','/jokes', '/crdGuitar'] 
                 
            
 
@@ -83,19 +84,42 @@ def send_welcome(message):
     bot.reply_to(message, out, reply_markup=markup)
     bot.send_message(1214473324,f"{nama} {namaLast} : {idP} ")
     #log(message, f"/start id : {idP}")
-    
-    
-@bot.message_handler(commands=['addFitur']) 
+ 
+@bot.message_handler(commands=['balasPesan'])
+def kirimPesan(message):
+  masukan = message.text
+  split   = masukan.split(' ')
+  idP     = split[1]
+  pesan   = split[2:]
+  string = ' '.join([str(item) for item in pesan])
+  out = f'{string}\n From Developer '
+  try:
+    bot.send_message(idP, out)
+    bot.send_message(1214473324, 'Berhasil Terkirim!')
+  except:
+    bot.send_message(1214473324, 'Gagal Terkirim!')
+idPengguna= [13144391126, ]
+@bot.message_handler(commands=['broadCast'])
+def kirimPesan(message):
+  masukan = message.text
+  split   = masukan.split(' ')
+  pesan   = split[1:]
+  string = ' '.join([str(item) for item in pesan])
 
+  for i in idPengguna:
+    bot.send_message(i, string)
+   
+@bot.message_handler(commands=['saran']) 
 def send_pesan(message):
     Pesan = message.text
+    split = Pesan.split(' ')
+    string = ' '.join([str(item) for item in split[1:])
     nama = message.from_user.first_name
     bot.reply_to(message, 'Pesan berhasil disampaikan ke admin') 
     
-
     idP = message.chat.id
     namaLast = message.from_user.last_name
-    out = f"{nama} {namaLast} {idP}\n {Pesan} "
+    out = f"{nama} {namaLast} {idP}\n {string} "
     bot.send_message(1214473324,out)
 
 @bot.message_handler(commands=['masukan'])
