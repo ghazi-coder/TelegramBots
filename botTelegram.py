@@ -113,7 +113,7 @@ def kirimPesan(message):
 def send_pesan(message):
     Pesan = message.text
     split = Pesan.split(' ')
-    string = ' '.join([str(item) for item in split[1:])
+    string = ' '.join([str(item) for item in split[1:]])
     nama = message.from_user.first_name
     bot.reply_to(message, 'Pesan berhasil disampaikan ke admin') 
     
