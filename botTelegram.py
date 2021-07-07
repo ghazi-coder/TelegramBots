@@ -337,15 +337,16 @@ def downloadig(message):
     from selenium.webdriver.support.ui import WebDriverWait     
     from selenium.webdriver.common.by import By     
     from selenium.webdriver.support import expected_conditions as EC
+    
+    chrome_options = webdriver.ChromeOptions()
+    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    chrome_options.add_argument("--no-sandbox")
 
-    op = webdriver.ChromeOptions()
-    op.binary_location = '/app/.apt/usr/bin/google-chrome'
-    op.add_argument("--headless")
-    op.add_argument("--no-sandbox")
-    op.add_argument("--disable-dev-sh-usage")
     bot.reply_to(message, "Paste aja linknya di chat...")
     #'C:\chromedriver_win32\chromedriver'
-    driver = webdriver.Chrome(executable_path= "/app/.chromedriver/bin/chromedriver", chrome_options=op)  # Optional argument, if not specified will search path.
+    driver = webdriver.Chrome(executable_path= "/app/.chromedriver/bin/chromedriver", chrome_options= chrome_options)  # Optional argument, if not specified will search path.
 
     bot.reply_to(message, "Paste aja linknya di chat...2")
     driver.get('https://tikmate.online/?lang=id')
