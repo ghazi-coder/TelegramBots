@@ -21,7 +21,7 @@ bot = telebot.TeleBot("1857480052:AAGyNqGpLL7wQ1YiRN313ISiqy4lrcOs49w")
 def menu(message):
     nama = message.from_user.first_name
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
-🔰/menu        > Perintah yg dapat dilakukan Bot.
+🔰/menu        > Perintah yg dapat dilakukan Bot
 📨/saran text > mengirimkan pesan kepada developer
 
 1️⃣ ISLAMIC ✨
@@ -339,13 +339,13 @@ def downloadig(message):
     from selenium.webdriver.support import expected_conditions as EC
 
     op = webdriver.ChromeOptions()
-    op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+    op.binary_location = '/app/.apt/usr/bin/google-chrome'
     op.add_argument("--headless")
     op.add_argument("--no-sandbox")
     op.add_argument("--disable-dev-sh-usage")
     bot.reply_to(message, "Paste aja linknya di chat...")
     #'C:\chromedriver_win32\chromedriver'
-    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)  # Optional argument, if not specified will search path.
+    driver = webdriver.Chrome(executable_path= "/app/.chromedriver/bin/chromedriver", chrome_options=op)  # Optional argument, if not specified will search path.
 
     bot.reply_to(message, "Paste aja linknya di chat...2")
     driver.get('https://tikmate.online/?lang=id')
@@ -357,8 +357,9 @@ def downloadig(message):
     #driver.find_element_by_css_selector('.abutton.is-success.is-fullwidth').click()
     time.sleep(5)
     out = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".abuttons > a"))).get_attribute('href')
+    bot.reply_to(message, "Paste aja linknya di chat...6")
     #print(driver.find_element_by_css_selector("").get_attribute('href'))
-    bot.reply_to(message, out)
+    bot.reply_to(message, str(out))
     
 
 
