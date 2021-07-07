@@ -21,7 +21,7 @@ bot = telebot.TeleBot("1857480052:AAGyNqGpLL7wQ1YiRN313ISiqy4lrcOs49w")
 def menu(message):
     nama = message.from_user.first_name
     bot.reply_to(message, f'''🤖 Hai {nama} ini yg bisa saya lakukan
-🔰/menu        > Perintah yg dapat dilakukan Bot
+🔰/menu        > Perintah yg dapat dilakukan Bot.
 📨/saran text > mengirimkan pesan kepada developer
 
 1️⃣ ISLAMIC ✨
@@ -331,7 +331,41 @@ def downloadig(message):
 # TIKTOK vIDEO
 @bot.message_handler(commands=['tiktokVid'])
 def downloadig(message):
+    
+    from selenium import webdriver
+    import os
+    from selenium.webdriver.support.ui import WebDriverWait     
+    from selenium.webdriver.common.by import By     
+    from selenium.webdriver.support import expected_conditions as EC
+
+    op = webdriver.ChromeOptions()
+    op.binary_location = os.environ.get('GOOGLE_CHROME_BIN')
+    op.add_argument("--headless")
+    op.add_argument("--no-sandbox")
+    op.add_argument("--disable-dev-sh-usage")
     bot.reply_to(message, "Paste aja linknya di chat...")
+    #'C:\chromedriver_win32\chromedriver'
+    driver = webdriver.Chrome(executable_path=os.environ.get("CHROMEDRIVER_PATH"), chrome_options=op)  # Optional argument, if not specified will search path.
+
+    bot.reply_to(message, "Paste aja linknya di chat...2")
+    driver.get('https://tikmate.online/?lang=id')
+    bot.reply_to(message, "Paste aja linknya di chat...3")
+    driver.find_element_by_class_name('form-control').send_keys("https://vt.tiktok.com/ZSJqkMok8/")
+    bot.reply_to(message, "Paste aja linknya di chat...4")
+    driver.find_element_by_css_selector('.btn.btn-outline-success').click()
+    bot.reply_to(message, "Paste aja linknya di chat...5")
+    #driver.find_element_by_css_selector('.abutton.is-success.is-fullwidth').click()
+    time.sleep(5)
+    out = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".abuttons > a"))).get_attribute('href')
+    #print(driver.find_element_by_css_selector("").get_attribute('href'))
+    bot.reply_to(message, out)
+    
+
+
+
+
+
+
 
 def kirimVideo(file, alamat):
     out = open(file, 'rb')
