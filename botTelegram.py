@@ -14,7 +14,7 @@ import random
 import os
 bot = telebot.TeleBot("1857480052:AAGyNqGpLL7wQ1YiRN313ISiqy4lrcOs49w")
 
-#PERINTAH /MENU
+#PERINTAH /MENU =
 
 
 @bot.message_handler(commands=['menu'])
