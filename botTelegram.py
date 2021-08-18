@@ -328,40 +328,7 @@ def downloadig(message):
         
       
 
-# TIKTOK vIDEO
-@bot.message_handler(commands=['tiktokVid'])
-def downloadig(message):
-    
-    from selenium import webdriver
-    import os
-    from selenium.webdriver.support.ui import WebDriverWait     
-    from selenium.webdriver.common.by import By     
-    from selenium.webdriver.support import expected_conditions as EC
-    
-    chrome_options = webdriver.ChromeOptions()
-    chrome_options.binary_location = os.environ.get("GOOGLE_CHROME_BIN")
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    chrome_options.add_argument("--no-sandbox")
 
-    bot.reply_to(message, "Paste aja linknya di chat...")
-    #'C:\chromedriver_win32\chromedriver'
-    driver = webdriver.Chrome(executable_path= "/app/.chromedriver/bin/chromedriver", chrome_options= chrome_options)  # Optional argument, if not specified will search path.
-
-    bot.reply_to(message, "Paste aja linknya di chat...2")
-    driver.get('https://tikmate.online/?lang=id')
-    bot.reply_to(message, "Paste aja linknya di chat...3")
-    driver.find_element_by_class_name('form-control').send_keys("https://vt.tiktok.com/ZSJqkMok8/")
-    bot.reply_to(message, "Paste aja linknya di chat...4")
-    driver.find_element_by_css_selector('.btn.btn-outline-success').click()
-    bot.reply_to(message, "Paste aja linknya di chat...5")
-    #driver.find_element_by_css_selector('.abutton.is-success.is-fullwidth').click()
-    time.sleep(5)
-    out = WebDriverWait(driver, 10).until(EC.visibility_of_element_located((By.CSS_SELECTOR, ".abuttons > a"))).get_attribute('href')
-    bot.reply_to(message, "Paste aja linknya di chat...6")
-    #print(driver.find_element_by_css_selector("").get_attribute('href'))
-    bot.reply_to(message, str(out))
-    
 
 
 
